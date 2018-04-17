@@ -8,6 +8,7 @@ import { WeatherItem } from './weather';
 })
 export class WeatherItemComponent implements OnInit {
   @Input() weatherItem: WeatherItem;
+  @Input() details = false;
   constructor() { }
 
   ngOnInit() {

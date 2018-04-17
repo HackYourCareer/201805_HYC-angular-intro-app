@@ -10,15 +10,14 @@ import { WeatherItem } from '../weather-item/weather';
 })
 export class WeatherSearchComponent implements OnInit {
   private searchStream = new Subject<string>();
-  data: any = null;
+  weatherItem: WeatherItem = null;
 
   constructor(private weatherService: WeatherService) {
   }
 
   submit() {
-    const weatherItem = new WeatherItem(this.data.name, this.data.weather[0].description, this.data.main.temp, this.data.weather[0].icon);
-    this.weatherService.addWeatherItem(weatherItem);
-    this.data = null;
+    this.weatherService.addWeatherItem(this.weatherItem);
+    this.weatherItem = null;
   }
 
   onSearchLocation(cityName: string) {
@@ -32,8 +31,8 @@ export class WeatherSearchComponent implements OnInit {
       .distinctUntilChanged()
       .switchMap((input: string) => this.weatherService.searchWeatherData(input))
       .subscribe(
-        data => this.data = data,
-        err => this.data = null
+        data => this.weatherItem = data,
+        err => this.weatherItem = null
       );
   }
 

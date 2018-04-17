@@ -1,8 +1,16 @@
 <article class="weather-element">
   <div class="col-1">
-      <h3>{{ weatherItem.cityName }}</h3>
+    <div *ngIf="!details">
+        <h3>{{ weatherItem.cityName }}</h3>
+    </div>
+    <div *ngIf="details">
+            <h3>{{ weatherItem.date | date:'EEEE HH:mm dd-MM-yy' }}</h3>
+    </div>
       <p class="info"><img id="wicon" [src]="getIconUrl()" alt="Weather icon"> {{ weatherItem.description }}</p>
-      <div id="icon"></div>
+    <div *ngIf="details">
+        <p class="info">Humidity: {{ weatherItem.humidity }}%</p>
+        <p class="info">Pressure: {{ weatherItem.pressure }}hPa</p>
+    </div>
   </div>
   <div class="col-2">
       <span class="temperature">{{ weatherItem.temperature }}°C</span>
