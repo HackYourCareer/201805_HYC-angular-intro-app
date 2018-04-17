@@ -1,6 +1,7 @@
 <app-weather-search></app-weather-search>
-<a *ngFor="let weatherItem of weatherItems" routerLink="/weather/{{weatherItem.cityName}}">
+
   <section class="weather-list">
-    <app-weather-item [weatherItem]="weatherItem"></app-weather-item>
+    <a *ngFor="let weatherItem of weatherItems" routerLink="/weather/{{weatherItem.cityName}}">
+      <app-weather-item [weatherItem]="weatherItem"></app-weather-item>
+    </a>
   </section>
-</a>

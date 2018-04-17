@@ -5,6 +5,6 @@
         <button [disabled]="weatherItem == null" type="submit">Add City</button>
     </form>
     <div *ngIf="weatherItem != null">
-        <span class="info">City found:</span> {{weatherItem.name}}
+        <span class="info">City found:</span> {{weatherItem.cityName}}
     </div>
 </section>
