@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  API_KEY: 'KEY'
+  API_KEY: 'PUT_IT_HERE'
 };

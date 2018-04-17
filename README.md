@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
+## Weather API key
+
+Obtain free API key from http://openweathermap.org/ and configure it in src/environments/environment.ts file.
+
+```
+export const environment = {
+  production: false,
+  API_KEY: 'PUT_IT_HERE'
+};
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
