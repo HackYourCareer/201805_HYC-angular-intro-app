@@ -1,8 +1,8 @@
 <section class="weather-search">
-    <form (ngSubmit)="submit()">
+    <form (ngSubmit)="add()">
         <label for="city">City</label>
-        <input ngControl="location" type="text" id="city" (input)="onSearchLocation(input.value)" required #input>
-        <button [disabled]="weatherItem == null" type="submit">Add City</button>
+        <input type="text" name="city" id="city" (input)="onSearchLocation(input.value)" required #input [(ngModel)]="cityName">
+        <button type="submit" [disabled]="weatherItem == null">Add</button>
     </form>
     <div *ngIf="weatherItem != null">
         <span class="info">City found:</span> {{weatherItem.cityName}}

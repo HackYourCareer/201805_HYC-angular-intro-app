@@ -21,19 +21,27 @@
     }
   
     button {
-      background-color: #2ecc71;
-      border: none;
-      padding: 4px 8px;
-      box-shadow: 1px 1px 1px #95a5a6;
-      cursor: pointer;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 15px 40px;
+      display: inline-block;
+      border-radius: 100px;
+      transition: all .2s;
+      position: relative;
       color: white;
     }
+
+    button {
+      background-color: dodgerblue;
+      color: #ffffff;
+  }
   
-    button:hover {
-      background-color: #27ae60;
+    button:hover:enabled {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     button:disabled {
-      background-color: gray;
+      background-color: lightgray;
     }
   }

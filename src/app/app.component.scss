@@ -6,37 +6,28 @@ body {
   }
   
   header {
-    background-color: #3498db;
+    height: 40vh;
+    background-image: url(../assets/images/header.png);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 40vh, 0 100%);
     padding: 30px;
-    width: 100%;
-    color: white;
     text-align: center;
     font-size: 30px;
-    color: #f1c40f;
+    color: #FFFFFF;
   }
 
-  
-  .tooltip {
-    position: absolute;
-    padding: 3px;
-    font-size: 12px;
-    background-color: #eee;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    text-align: left;
+  .heading-primary {
+    color: #fff;
+    backface-visibility: hidden;
+    margin-bottom: 60px;
   }
-  
-  .temperature {
-    cursor: default;
-  }
-  
-  .info {
-    color: rgba(95, 95, 95, 0.51);
-    font-weight: bold;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .weather-list {
-      width: 80%;
-    }
-  }
+
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

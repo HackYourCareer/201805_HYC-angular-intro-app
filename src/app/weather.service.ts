@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { WeatherItem } from './weather-item/weather';
@@ -11,8 +13,9 @@ export class WeatherService {
     private WEATHER_ITEMS = [];
     constructor(private http: HttpClient) { }
 
-    private WEATHER_MAPPER = (data: any, city: string) => 
-                new WeatherItem(new Date(data.dt * 1000), city, data.weather[0].description, data.main.temp, data.weather[0].icon, data.main.pressure, data.main.humidity);
+    private WEATHER_MAPPER = (data: any, city: string) =>
+                new WeatherItem(new Date(data.dt * 1000), city, data.weather[0].description,
+                     data.main.temp, data.weather[0].icon, data.main.pressure, data.main.humidity)
 
     getWeatherItems() {
         return this.WEATHER_ITEMS;

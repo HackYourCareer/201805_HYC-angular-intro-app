@@ -10,12 +10,12 @@ import { WeatherService } from '../weather.service';
 })
 export class WeatherDetailsComponent implements OnInit {
   private city: string;
-  private forecast: WeatherItem[];
+  public forecast: WeatherItem[];
 
   constructor(private route: ActivatedRoute, private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => 
+    this.route.paramMap.subscribe((params: ParamMap) =>
       this.weatherService.searchWeatherForecast(params.get('city')).
         subscribe( data => {
           this.city = params.get('city');

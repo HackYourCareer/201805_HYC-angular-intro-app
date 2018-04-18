@@ -1,23 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { WeatherService } from '../weather.service';
 import { WeatherItem } from '../weather-item/weather';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-weather-search',
   templateUrl: './weather-search.component.html',
   styleUrls: ['./weather-search.component.scss']
 })
-export class WeatherSearchComponent implements OnInit {
+export class WeatherSearchComponent implements OnInit, OnDestroy {
+  cityName: string;
   private searchStream = new Subject<string>();
+  private searchStreamSubscription: Subscription;
   weatherItem: WeatherItem = null;
 
   constructor(private weatherService: WeatherService) {
   }
 
-  submit() {
+  add() {
     this.weatherService.addWeatherItem(this.weatherItem);
     this.weatherItem = null;
+    this.cityName = '';
   }
 
   onSearchLocation(cityName: string) {
@@ -26,7 +33,7 @@ export class WeatherSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchStream
+    this.searchStreamSubscription = this.searchStream
       .debounceTime(300)
       .distinctUntilChanged()
       .switchMap((input: string) => this.weatherService.searchWeatherData(input))
@@ -34,6 +41,12 @@ export class WeatherSearchComponent implements OnInit {
         data => this.weatherItem = data,
         err => this.weatherItem = null
       );
+  }
+
+  ngOnDestroy(): void {
+    if (this.searchStreamSubscription) {
+      this.searchStreamSubscription.unsubscribe();
+    }
   }
 
 }
