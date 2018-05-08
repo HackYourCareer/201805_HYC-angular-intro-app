@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { WeatherService } from '../weather.service';
 import { WeatherItem } from '../weather-item/weather';
@@ -17,6 +17,7 @@ export class WeatherSearchComponent implements OnInit, OnDestroy {
   private searchStream = new Subject<string>();
   private searchStreamSubscription: Subscription;
   weatherItem: WeatherItem = null;
+  @Output() notify = new EventEmitter<boolean>();
 
   constructor(private weatherService: WeatherService) {
   }
@@ -38,8 +39,15 @@ export class WeatherSearchComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .switchMap((input: string) => this.weatherService.searchWeatherData(input))
       .subscribe(
-        data => this.weatherItem = data,
-        err => this.weatherItem = null
+        data => {
+          this.weatherItem = data;
+          this.notify.emit(false);
+        },
+        err => {
+          console.log(err);
+          this.weatherItem = null;
+          this.notify.emit(true);
+        }
       );
   }
 

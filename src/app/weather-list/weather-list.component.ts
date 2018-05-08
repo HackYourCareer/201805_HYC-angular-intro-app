@@ -9,11 +9,16 @@ import { WeatherItem } from '../weather-item/weather';
 })
 export class WeatherListComponent implements OnInit {
   weatherItems: WeatherItem[];
+  showInfo = false;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
     this.weatherItems = this.weatherService.getWeatherItems();
+  }
+
+  handleNotification(event) {
+    this.showInfo = event;
   }
 
 }

@@ -1,5 +1,5 @@
-<app-weather-search></app-weather-search>
-
+<app-weather-search (notify)="handleNotification($event)"></app-weather-search>
+<p *ngIf="showInfo">City Name does not exisits :(</p>
   <section class="weather-list">
     <a *ngFor="let weatherItem of weatherItems" routerLink="/weather/{{weatherItem.cityName}}">
       <app-weather-item [weatherItem]="weatherItem"></app-weather-item>
