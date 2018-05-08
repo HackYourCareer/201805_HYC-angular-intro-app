@@ -41,12 +41,14 @@ export class WeatherSearchComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           this.weatherItem = data;
-          this.notify.emit(false);
+          if (data) {
+            this.notify.emit(false);
+          } else {
+            this.notify.emit(true);
+          }
         },
         err => {
-          console.log(err);
           this.weatherItem = null;
-          this.notify.emit(true);
         }
       );
   }

@@ -31,7 +31,12 @@ export class WeatherService {
 
     searchWeatherData(cityName: string): Observable<WeatherItem> {
         return this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${environment.API_KEY}&units=metric`).
-            map(data => this.WEATHER_MAPPER(data, cityName));
+            map(data => this.WEATHER_MAPPER(data, cityName))
+            .catch(error => {
+              console.error(error);
+              return Observable.of(null);
+          });
+
     }
 
     searchWeatherForecast(cityName: string): Observable<WeatherItem[]> {
